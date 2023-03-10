@@ -10,7 +10,7 @@ const login = async( req = request, res = response ) => {
 
     try {
         
-        // Verificar si el correo existe
+        //Verificar si el correo existe
         const usuario = await Usuario.findOne( { correo } );
 
         if ( !usuario ) {
@@ -19,14 +19,14 @@ const login = async( req = request, res = response ) => {
             });
         }
     
-        // Si el usuario esta activo (usuario.estado === false)
+        //Si el usuario esta activo (usuario.estado === false)
         if ( usuario.estado === false ) {
             return res.status(400).json({
                 msg: 'La cuenta del usuario esta inactivo'
             });
         }
     
-        // Verificar la password el usuario    //comporeSync, encripta ambas passwords y las compara
+        //Verificar la password el usuario    //comporeSync, encripta ambas passwords y las compara
         const validarPassword = bcryptjs.compareSync( password, usuario.password );
         if ( !validarPassword ) {
             return res.status(400).json({
@@ -34,11 +34,11 @@ const login = async( req = request, res = response ) => {
             });
         }
 
-        // Generar JWT
+        //Generar JWT
         const token = await generarJWT( usuario.id );
     
         res.json({
-            msg: 'Login Auth Funciona!',
+            msg: 'BIENVENID@!!',
             correo, password,
             token
         });

@@ -13,7 +13,7 @@ const getUsuarios = async (req = request, res = response) => {
 
     const listaUsuarios = await Promise.all([
         Usuario.countDocuments(query),
-        Usuario.find(query)
+        Usuario.find(query).populate('compra')
     ]);
 
     res.json({
@@ -42,45 +42,102 @@ const postUsuario = async (req = request, res = response) => {
 
 }
 
+const postRegistroUser = async (req = request, res = response) => {
+
+    const { nombre, correo, password } = req.body;
+    const usuarioDB = new Usuario({ nombre, correo, password });
+
+    //Encriptar la contraseña
+    const salt = bcryptjs.genSaltSync();
+    usuarioDB.password = bcryptjs.hashSync(password, salt);
+
+    //Guardar el nuevo usuario en la DB
+    await usuarioDB.save();
+
+    res.status(200).json({
+        msg: 'Registro Exitoso',
+        usuarioDB
+    });
+}
+
+
+const putUsuarioPerfil = async (req = request, res = response) => {
+    const { id } = req.params;
+    const usuario = req.usuario.id;
+    const idUsuario = usuario.toString();
+
+    if (id === idUsuario) {
+        const { _id, rol, ...resto } = req.body;
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync(resto.password, salt);
+        const usuarioEditado = await Usuario.findByIdAndUpdate(id, resto, { new: true });
+        res.status(200).json({
+            msg: 'PUT API perfil de usuarios',
+            usuarioEditado
+        })
+    } else {
+        res.status(401).json({
+            msg: 'Solo puedes editar tu perfil >:('
+
+        })
+    }
+
+}
+
 const putUsuario = async (req = request, res = response) => {
 
     const { id } = req.params;
+    const { _id, role, ...resto } = req.body;
 
-    //Ignoramos el _id, rol, estado y google al momento de editar y mandar la petición en el req.body
-    const { _id, rol, estado, google, ...resto } = req.body;
-
-    // //Encriptar password
     const salt = bcryptjs.genSaltSync();
+
     resto.password = bcryptjs.hashSync(resto.password, salt);
 
-    //editar y guardar
-    const usuarioEditado = await Usuario.findByIdAndUpdate(id, resto);
+    const usuarioEditado = await User.findByIdAndUpdate(id, resto, { new: true });
 
     res.json({
-        msg: 'PUT API de usuario',
+        msg: 'PUT API usuarios',
         usuarioEditado
-    });
+
+    })
+
+}
+
+
+const deleteUsuarioPerfil = async (req = request, res = response) => {
+    const { id } = req.params;
+    const usuario = req.usuario._id;
+    const idUsuario = usuario.toString();
+
+    if (id === idUsuario) {
+        const usuarioEliminado = await Usuario.findByIdAndDelete(id);
+        res.status(200).json({
+            msg: 'DELETE API perfil de usuarios',
+            usuarioEliminado
+        })
+    } else {
+        res.status(401).json({
+            msg: 'Solo puedes eliminar tu perfil >:('
+
+        })
+    }
 
 }
 
 
 const deleteUsuario = async (req = request, res = response) => {
-
+    //Req.params sirve para traer parametros de las rutas
     const { id } = req.params;
+    //Eliminar fisicamente de la DB
+    const usuarioEliminado = await Usuario.findByIdAndDelete( id);
 
-    //eliminar fisicamente y guardar
-    const usuarioEliminado = await Usuario.findByIdAndDelete(id);
-
-    // O bien cambiando el estado del usuario
-
-    //editar y guardar
+    //Eliminar cambiando el estado a false
     //const usuarioEliminado = await Usuario.findByIdAndUpdate(id, { estado: false });
 
     res.json({
-        msg: 'DELETE API de usuario',
+        msg: 'DELETE API de usuarios',
         usuarioEliminado
     });
-
 }
 
 
@@ -88,6 +145,9 @@ const deleteUsuario = async (req = request, res = response) => {
 module.exports = {
     getUsuarios,
     postUsuario,
+    postRegistroUser,
     putUsuario,
-    deleteUsuario
+    putUsuarioPerfil,
+    deleteUsuario,
+    deleteUsuarioPerfil
 }

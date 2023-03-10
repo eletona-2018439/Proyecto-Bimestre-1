@@ -1,97 +1,65 @@
 //Importacion
 const { response, request } = require('express');
+const bcryptjs = require('bcryptjs');
+
 //Modelos
 const Categoria = require('../models/categoria');
 
-const obtenerCategorias = async(req = request, res = response) => {
 
-     //Condición, me busca solo los categorias que tengan estado en true
-     const query = { estado: true };
-
-     const listaCategorias = await Promise.all([
-         Categoria.countDocuments(query),
-         Categoria.find(query).populate('usuario', 'nombre')
-     ]);
- 
-     res.json({
-         msg: 'GET API de usuarios',
+const getCategorias = async (req = request, res = response) => {
+    //condiciones del get    
+    const query = { estado: true };
+    const listaCategorias = await Promise.all([
+        Categoria.countDocuments(query),
+        Categoria.find(query)
+    ]);
+    res.json({
+        msg: 'GET Api Categorias',
         listaCategorias
-     });
+    });
+}
 
+const postCategoria = async (req = request, res = response) => {
+
+    const { nombre, proveedor, descripcion } = req.body;
+    const categoriaDB = new Categoria({ nombre, proveedor, descripcion });
+
+    //Guardar en Base de datos
+    await categoriaDB.save();
+
+    res.json({
+        msg: 'POST API de categoria',
+        categoriaDB
+    });
 
 }
 
-const obtenerCategoriaPorId = async(req = request, res = response) => {
+const putCategoria = async (req = request, res = response) => {
 
     const { id } = req.params;
-    const categoria = await Categoria.findById( id )
-                                            .populate('usuario', 'nombre');
+
+    const { _id, estado, ...resto } = req.body;
+
+    const categoriaEditada = await Categoria.findByIdAndUpdate(id, resto);
+
 
     res.json({
-        msg: 'categoria por id',
-        categoria
+        msg: 'PUT API de categoria',
+        categoriaEditada
     });
 
 }
 
 
-const crearCategoria = async (req = request, res = response) => {
 
-    const nombre  = req.body.nombre.toUpperCase();
-
-    //Validación para encontar una cateroia por nombre en la DB
-    const categoriaDB = await Categoria.findOne({ nombre });
-    if (categoriaDB) {
-        return res.status(400).json({
-            msg: `La categoria ${categoriaDB.nombre}, ya existe en la DB`
-        });
-    }
-
-    //Generar la data a guardar
-    const data = {
-        nombre,
-        usuario: req.usuario._id
-    }
-
-    const categoria = new Categoria(data);
-    //Guardar en DB
-    await categoria.save();
-
-    res.status(201).json({
-        msg: 'Post de categoria',
-        categoria
-    });
-
-}
-
-
-const actualizarCategoria = async(req = request, res = response) => {
+const deleteCategoria = async (req = request, res = response) => {
 
     const { id } = req.params;
-    const { _id, estado, usuario, ...data } = req.body;
-    
-    data.nombre = data.nombre.toUpperCase(); //cambiamos el nombre todo a mayusculas
-    data.usuario = req.usuario._id; //hacemos referencia al usuario que hizo el put por medio del token
-
-    //Edición de categoria                                         // new: true Sirve para enviar el nuevo documento actualizado     
-    const categoria = await Categoria.findByIdAndUpdate( id, data, { new: true } );
+    const categoriaEliminada = await Categoria.findByIdAndDelete(id);
 
     res.json({
-        msg: 'Put de categoria',
-        categoria
-    });
-
-}
-
-
-const eliminarCategoria = async(req = request, res = response) => {
-
-    const { id } = req.params;
-    const categoriaBorrada = await Categoria.findByIdAndUpdate(id, { estado: false }, { new: true });
-
-    res.json({
-        msg: 'delete categoria',
-        categoriaBorrada
+        msg: 'DELETE API de categoria',
+        categoriaEliminada
     });
 
 }
@@ -99,9 +67,8 @@ const eliminarCategoria = async(req = request, res = response) => {
 
 
 module.exports = {
-    obtenerCategorias,
-    obtenerCategoriaPorId,
-    crearCategoria,
-    actualizarCategoria,
-    eliminarCategoria
+    getCategorias,
+    postCategoria,
+    putCategoria,
+    deleteCategoria
 }

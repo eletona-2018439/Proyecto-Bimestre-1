@@ -3,19 +3,21 @@ const { Schema, model } = require('mongoose');
 const CategoriaSchema = Schema({
     nombre: {
         type: String,
-        required: [true, 'El nombre de la categoria es obligatorio'],
+        required: [true, 'El tipo es obligatorio']
+    },
+    proveedor: {
+        type: String,
+        required: [true, 'El proveedor es obligatorio'],
         unique: true
-    }, 
+    },
+    descripcion: {
+        type: String,
+        required: [true, 'La descripción es obligatoria']
+    },
     estado: {
         type: Boolean,
-        default: true,
-        required: true
-    },
-    usuario: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: true
+        default: true
     }
 });
 
-module.exports = model('Categoria', CategoriaSchema);
+module.exports = model('Categoria', CategoriaSchema)

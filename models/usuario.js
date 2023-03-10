@@ -12,15 +12,13 @@ const UsuarioSchema = Schema({
     },
     password: {
         type: String,
-        required: [true, 'El contraseña es obligatorio']
-    },
-    img: {
-        type: String
+        required: [true, 'El contraseña es obligatorio'],
     },
     rol: {
         type: String,
         required: true,
-        //emun: ['ADMIN_ROLE', 'USER_ROLE']
+        //emun: ['ADMIN_ROLE', 'USER_ROLE', 'SOPORTE']
+        default: 'USER_ROLE',
     },
     estado: {
         type: Boolean,
