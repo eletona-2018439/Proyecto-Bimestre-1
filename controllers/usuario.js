@@ -13,7 +13,7 @@ const getUsuarios = async (req = request, res = response) => {
 
     const listaUsuarios = await Promise.all([
         Usuario.countDocuments(query),
-        Usuario.find(query).populate('compra')
+        Usuario.find(query)
     ]);
 
     res.json({

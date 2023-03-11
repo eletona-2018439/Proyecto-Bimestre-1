@@ -14,6 +14,11 @@ const CategoriaSchema = Schema({
         type: String,
         required: [true, 'La descripción es obligatoria']
     },
+    usuario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: true
+    },
     estado: {
         type: Boolean,
         default: true
