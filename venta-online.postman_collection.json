@@ -1,0 +1,463 @@
+{
+	"info": {
+		"_postman_id": "dfb99405-d16b-442e-a2b0-a5b643212722",
+		"name": "venta-online",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Edy Letona\",\r\n    \"correo\": \"edy@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/usuarios/registro"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"correo\": \"edy13@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Categorias Por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/categorias/mostrar/"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Categorias ",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/categorias/mostrar"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Categoria",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juegos de mesa\",\r\n    \"proveedor\": \"TLL\",\r\n    \"descripcion\": \"Encontraras variedad de juegos para pasarla un rato con tu familia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/categorias/agregar"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Categoria",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Leches\",\r\n    \"proveedor\": \"Ilgua\",\r\n    \"descripcion\": \"Leche sin lactosa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/categorias/editar/"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Categoria",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/categorias/eliminar/"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/usuarios/mostrar"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Edy Argueta\",\r\n    \"correo\": \"edy@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"ADMIN_ROLE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/usuarios/agregar"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Usuario",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Joel Santiago\",\r\n    \"correo\": \"joel@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"USER_ROLE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/usuarios/editar/"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Usuario ",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/api/usuarios/eliminar/"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Perfil",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Edy Leonel\",\r\n    \"correo\": \"edy13@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"ADMIN_ROLE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/usuarios/editarPerfil/"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Perfil",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"url": "localhost:8080/api/usuarios/eliminarPerfil/"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/productos/mostrar"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Producto ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Queso\",\r\n    \"categoria\": \"640b95f6c99d7226a160a0b2\",\r\n    \"precio\": 5,\r\n    \"descripcion\": \"Queso amarrillo en forma cuadrada\",\r\n    \"stock\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/productos/agregar"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Producto",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Fruta fresca\",\r\n    \"categoria\": \"640bd826a17bcb21445abdb0\",\r\n    \"precio\": 5,\r\n    \"descripcion\": \"Bebida refrescante con diferentes sabores\",\r\n    \"stock\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/productos/editar/"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Producto",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"url": "localhost:8080/api/productos/eliminar/"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Productos Agotados",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/api/productos/agotados"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Productos Mas Vendidos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/productos/vendidos"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Carrito De Compras",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/carritos/agregar"
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar Producto al Carrito de Compras",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/carritos/agregarProducto/640bbc2caf45622bd0017706",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"carritos",
+						"agregarProducto",
+						"640bbc2caf45622bd0017706"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generar Factura",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "localhost:8080/api/facturas/generarFactura"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Facturas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "",
+						"type": "default"
+					}
+				],
+				"url": "localhost:8080/api/facturas/mostrar"
+			},
+			"response": []
+		}
+	]
+}
