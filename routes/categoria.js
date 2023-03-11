@@ -1,42 +1,23 @@
-//importaciones
 const { Router } = require('express');
-const { check } = require('express-validator');
-const { getCategorias, postCategoria, putCategoria, deleteCategoria, getCategoriaPorId } = require('../controllers/categoria');
-const { existeCategoriaPorId } = require('../helpers/db-validators');
-const { validarCampos } = require('../middlewares/validar-campos');
+const { getCategoria, postCategoria, putCategoria, deleteCategoria, getCategoriaById } = require('../controllers/categoria');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router = Router();
 
-router.get('/mostrar', getCategorias);
-
-router.get('/mostrar/:id',[
-    check('id', "no es un id valido").isMongoId(),
-    //check('id').custom( existeCategoriaPorId),
-    validarCampos
-], getCategoriaPorId)
-
-router.post('/agregar', [
+router.get('/mostrar', getCategoria);
+router.post('/agregar',[
     validarJWT,
-    esAdminRole,
-    check('nombre', 'El nombre de la categoria es obligatoria').not().isEmpty(),
-    check('descripcion', 'La descripción es obligatoria').not().isEmpty(),
-    validarCampos
+    esAdminRole
 ], postCategoria);
-
-router.put('/editar/:id', [
+router.put('/editar/:id',[
     validarJWT,
-    esAdminRole,
-    check('id', 'No es un ID valido').isMongoId(),
-    validarCampos
+    esAdminRole
 ], putCategoria);
-
-router.delete('/eliminar/:id', [
+router.delete('/eliminar/:id',[
     validarJWT,
-    esAdminRole,
-    check('id', 'No es un ID valido').isMongoId(),
-    validarCampos
+    esAdminRole
 ], deleteCategoria);
+router.get('/mostrar/:id', getCategoriaById);
 
 module.exports = router;

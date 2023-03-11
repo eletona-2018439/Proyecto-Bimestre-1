@@ -1,26 +1,24 @@
 const { Schema, model } = require('mongoose');
 
 const FacturaSchema = Schema({
-    codigo: {
-        type: String,
-        required: [true, 'El código de la factura es obligatorio']
-    },
-    admin: {
+    usuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
         required: true
+    }, 
+    fecha:{
+        type: Date,
+        required: true,
+        default: Date()
     },
-    cliente: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: true
+    total: {
+        type: Number,
+        default: 0
     },
-    carrito: {
-        type: Schema.Types.ObjectId,
-        ref: 'Carrito',
-        required: true
+    detalle:{
+        type: Array,
+        default: []
     }
 });
-
 
 module.exports = model('Factura', FacturaSchema);

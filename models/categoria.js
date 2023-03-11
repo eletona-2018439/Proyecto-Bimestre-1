@@ -1,27 +1,13 @@
-const { Schema, model } = require('mongoose');
+const {Schema , model} = require('mongoose');
 
 const CategoriaSchema = Schema({
-    nombre: {
-        type: String,
-        required: [true, 'El tipo es obligatorio']
-    },
-    proveedor: {
-        type: String,
-        required: [true, 'El proveedor es obligatorio'],
-        unique: true
+    categoria: {
+        type: String, 
+        required: [true, 'El nombre de la categoria es obligatorio']
     },
     descripcion: {
         type: String,
-        required: [true, 'La descripción es obligatoria']
-    },
-    usuario: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: true
-    },
-    estado: {
-        type: Boolean,
-        default: true
+        required: [true, 'La descripción de la categoría es obligatoria']
     }
 });
 

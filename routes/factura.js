@@ -1,28 +1,18 @@
-const { Router } = require('express');
-const { check } = require('express-validator');
-const { postFactura, getFacturas, getFacturaPorID } = require('../controllers/factura');
-const { validarCampos } = require('../middlewares/validar-campos');
+const {Router} = require('express');
+const { getFactura, comprar } = require('../controllers/factura');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router = Router();
 
-router.get('/mostrar', [
+router.get('/mostrar',[
     validarJWT,
     esAdminRole
-], getFacturas);
+], getFactura);
 
- router.get('/:id', [
-    validarJWT,
-    esAdminRole,
-    check('id', 'No es un id de Mongo Válido').isMongoId(),
-    validarCampos
-], getFacturaPorID);
-    
-router.post('/generarFactura', [
-    validarJWT,
-    esAdminRole,
-    validarCampos
-], postFactura);
+router.get('/comprar',[
+    validarJWT
+], comprar)
 
-module.exports = router;
+
+module.exports = router

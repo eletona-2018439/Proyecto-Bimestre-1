@@ -1,68 +1,36 @@
-const { request, response } = require('express');
+const {response, request} = require('express');
 const Factura = require('../models/factura');
+const Carrito = require('../models/carrito');
+const Producto = require('../models/producto');
 
-
-const getFacturas = async (req = request, res = response) => {
-
-    const listaFactura = await Promise.all([
+const getFactura = async (req = request, res = response) => {
+    const factura = await Promise.all([
         Factura.countDocuments(),
         Factura.find()
-            .populate('admin', 'nombre')
-            .populate('cliente', 'nombre')
-            .populate('carrito'),
-    ]);
+    ])
 
     res.json({
-        msg: 'GET API facturas',
-        listaFactura
-    });
-
-}
-
-const getFacturaPorID = async (req = request, res = response) => {
-    const { id } = req.params;
-    const facturaById = await Factura.findById(id)
-        .populate('admin', "nombre")
-        .populate('cliente', "nombre")
-        .populate('carrito');
-
-    res.status(201).json({
-        msg: 'GET API Facturas Por Id',
-        facturaById
-    });
-
-}
-
-const postFactura = async (req = request, res = response) => {
-
-    const { admin, ...body } = req.body;
-
-    const facturaDB = await Factura.findOne({ codigo: body.codigo });
-
-    if ( facturaDB ) {
-        return res.status(400).json({
-            msg: `La factura ${ facturaDB.codigo }, ya existe en la DB`
-        });
-    }
-
-    const data = {
-        ...body,
-        codigo: body.codigo,
-        admin: req.usuario._id
-    }
-
-    const factura = await Factura( data );
-    await factura.save();
-
-    res.status(201).json({
-        msg: 'POST API Factura',
+        msg: 'Facturas encontradas',
         factura
-    });
+    })
+}
 
+const comprar = async (req = request, res = response) => {
+    const usuario = req.user._id;
+    const carrito = await Carrito.findOne({usuario: usuario});
+    const total = carrito.subtotal;
+    const detalle = carrito.producto;
+    const facturaDB = new Factura({usuario, total, detalle});
+
+    await facturaDB.save();
+
+    res.status(201).json({
+        msg: 'Factura',
+        facturaDB
+    })
 }
 
 module.exports = {
-    getFacturas,
-    getFacturaPorID,
-    postFactura
+    getFactura,
+    comprar
 }

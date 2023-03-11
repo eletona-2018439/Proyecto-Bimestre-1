@@ -3,71 +3,70 @@ const Usuario = require('../models/usuario');
 const Carrito = require('../models/carrito');
 const Producto = require('../models/producto');
 
-const getCarritoDeCompras = async (req = request, res = response) => {
+const getCarrito = async (req = request, res = response) => {
     const carrito = await Promise.all([
         Carrito.countDocuments(),
-        Carrito.find()
-            .populate('usuario', 'nombre')
+        Carrito.find().populate('usuario', 'nombre')
     ])
 
     res.json({
-        msg: 'Lista de carritos',
+        msg: 'carritos encontrados',
         carrito
     })
 }
-
+//crear carrito vacio
 const postCarrito = async (req = request, res = response) => {
 
-    const usuario = req.usuario._id;
+    const usuario = req.user._id;
 
     const carritoExiste = await Carrito.findOne({usuario: usuario});
     if (carritoExiste) {
         return res.status(400).json({
-            msg: 'El usuario ya tiene un carrito ._.'
+            msg: 'El usuario ya tiene un carrito'
         })
         
     }
     const producto = [];
-    const carritoCreado = new Carrito({usuario, producto});
-    await carritoCreado.save();
+    const carritoDb = new Carrito({usuario, producto});
+    await carritoDb.save();
 
     res.status(201).json({
-        msg: 'POST API Carrito',
-        carritoCreado
+        msg: 'carrito creado',
+        carritoDb
     });
 }
 
-const agregarProductoCarrito = async (req = request, res = response) => {
+const agregarAlCarrito = async (req = request, res = response) => {
     const {idProducto} = req.params;
-    const usuario = req.usuario._id;
+    const usuario = req.user._id;
     
 
     const producto = await Producto.findOne(idProducto);
-    const carrito = await Carrito.findOne({usuario: usuario});
+    const carritoCoincide = await Carrito.findOne({usuario: usuario});
 
-    let totalCarrito = carrito.total + producto.precio;
+    let subtotalCarrito = carritoCoincide.subtotal + producto.precio;
 
-    if (!carrito) {
+    if (!carritoCoincide) {
         return res.status(400).json({
-            msg: 'No puedes realizar está acción :/'
+            msg: 'No tienes un carrito, o estas intentando agregar al carrito de alguien mas'
         })
     }
 
-    const carritoModificado = await Carrito.findOneAndUpdate(
-        { _id: carrito._id },
-        { $push: {'producto': producto},
-        total: totalCarrito },
-        { new: true }
+    const carritoActualizado = await Carrito.findOneAndUpdate(
+        {_id: carritoCoincide._id},
+        {$push: {'producto': producto},
+        subtotal: subtotalCarrito},
+        {new: true}
     );
     res.json({
-        msg: 'Agregaste un producto a tu Carrito!',
-        carritoModificado
+        msg: 'carrito actualizado',
+        carritoActualizado
     })
 
 }
 
 module.exports = {
-    getCarritoDeCompras,
+    getCarrito,
     postCarrito,
-    agregarProductoCarrito
+    agregarAlCarrito
 }
