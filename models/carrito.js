@@ -10,7 +10,7 @@ const CarritoSchema = Schema({
         type: Array,
         default: []
     },
-    subtotal:{
+    total:{
         type: Number,
         default: 0
     }

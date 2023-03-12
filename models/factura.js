@@ -15,7 +15,7 @@ const FacturaSchema = Schema({
         type: Number,
         default: 0
     },
-    detalle:{
+    detalles:{
         type: Array,
         default: []
     }

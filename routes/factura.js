@@ -1,18 +1,17 @@
 const {Router} = require('express');
-const { getFactura, comprar } = require('../controllers/factura');
+const { getFactura, generarFactura } = require('../controllers/factura');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router = Router();
 
 router.get('/mostrar',[
-    validarJWT,
-    esAdminRole
+    validarJWT
 ], getFactura);
 
-router.get('/comprar',[
+router.get('/generarFactura',[
     validarJWT
-], comprar)
+], generarFactura)
 
 
 module.exports = router

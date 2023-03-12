@@ -1,60 +1,73 @@
+//Configuración del server
+//Importaciones básicas
 const express = require('express');
 const cors = require('cors');
-const {dbConection} = require('../database/config');
+const { dbConection } = require('../database/config');
 
-class Server{
+class Server {
+
     constructor(){
-        //variables de configuración
+        //Variables de configuración
         this.app = express();
         this.port = process.env.PORT;
-        this.categoriaPath = '/api/categorias'
-        this.productoPath = '/api/productos'
-        this.usuarioPath = '/api/usuarios'
-        this.authPath = '/api/auth'
-        this.carritoPath = '/api/carrito'
-        this.facturaPath = '/api/factura'
+        this.authPath = '/api/auth';
+        this.usuarioPath = '/api/usuarios';
+        this.categoriaPath = '/api/categorias';
+        this.productoPath = '/api/productos';
+        this.carritoPath =  '/api/carritos';
+        this.facturaPath =  '/api/facturas';
 
-
-    
-        //Conectar a la base de datos
+        //Conectar a base de datos
         this.conectarDB();
 
-        //middleware
+        //Middlewares
         this.middlewares();
-
-        //rutas de mi app
-
+        
+        //Rutas de mi app
         this.routes();
-    
+
     }
 
-    //Metodo de conexion a mongo
+
+    //Metodo de conección a Mongo
     async conectarDB(){
         await dbConection();
     }
 
+    
     middlewares(){
 
-        //cors
-        this.app.use(cors());
-        this.app.use(express.static('public'));
-         //Lectura y parseo del body
-         this.app.use( express.json() );
+        //CORS
+        this.app.use( cors() );
+
+        //Lectura y parseo del body
+        this.app.use( express.json() );
+
+        //Directorio publico del proyecto
+        this.app.use(  express.static('public') );
+
     }
 
+
     routes(){
-        this.app.use(this.categoriaPath, require('../routes/categoria'));
-        this.app.use(this.productoPath, require('../routes/producto'));
-        this.app.use(this.usuarioPath, require('../routes/usuario'));
-        this.app.use(this.authPath, require('../routes/auth'));
-        this.app.use(this.carritoPath, require('../routes/carrito'));
-        this.app.use(this.facturaPath, require('../routes/factura'));
+        this.app.use( this.authPath , require('../routes/auth') );
+        this.app.use( this.usuarioPath , require('../routes/usuario') );
+        this.app.use( this.categoriaPath , require('../routes/categoria'));
+        this.app.use( this.productoPath , require('../routes/producto'));
+        this.app.use( this.carritoPath, require('../routes/carrito'));
+        this.app.use( this.facturaPath, require('../routes/factura'));
     }
+
 
     listen(){
         this.app.listen(this.port, () => {
-            console.log(`Servidor corriendo en puerto ${this.port}`);
+            console.log(`Servidor corriendo en puerto ${this.port}`)
         })
     }
+
+
 }
+
+
+
 module.exports = Server;

@@ -1,75 +1,120 @@
+//Importacion
 const { response, request } = require('express');
+const bcryptjs = require('bcryptjs');
 
 //Modelos
-
 const Categoria = require('../models/categoria');
+const Producto = require('../models/producto');
 
-//Get categorias
-const getCategoria = async (req = request, res = response) => {
 
+const getCategorias = async (req = request, res = response) => {
+    //condiciones del get    
+    const query = { estado: true };
     const listaCategorias = await Promise.all([
-        Categoria.countDocuments(),
-        Categoria.find()
-    ])
-
+        Categoria.countDocuments(query),
+        Categoria.find(query)
+    ]);
     res.json({
-        msg: 'GET API DE CATEGORIAS',
+        msg: 'GET Api Categorias',
         listaCategorias
-    })
-
+    });
 }
 
-const getCategoriaById = async (req = request, res = response) => {
+const getCategoriaPorId = async (req = request, res = response) => {
+
     const { id } = req.params;
-    const categoria = await Categoria.findById(id).populate('categoria', 'nombre');
+    const categoria = await Categoria.findById(id).populate('usuario','nombre')
+
     res.json({
-        msg: 'Categoria encontrada',
+        msg: 'GET API categoria por ID',
         categoria
     })
 }
+
 const postCategoria = async (req = request, res = response) => {
 
-    const { categoria, descripcion } = req.body;
-    const categoriaDB = new Categoria({ categoria, descripcion });
+    const nombre = req.body.nombre;
+    const descripcion = req.body.descripcion;
+    const proveedor = req.body.proveedor;
 
-    await categoriaDB.save();
-    res.status(201).json({
-        msg: 'POST API CATEGORIA',
-        categoriaDB
-    })
+    const categoriaDB = await Categoria.findOne({ nombre })
+    if (categoriaDB) {
+        return res.status(400).json({
+            msg: `La categoria ${categoriaDB.nombre}, ya existe.`
+        });
+    }
+    const data = {
+        usuario: req.usuario._id,
+        nombre,
+        descripcion,
+        proveedor
+    }
 
+    const categoriaAgregada = new Categoria(data);
+    await categoriaAgregada.save();
+    res.json({
+        msg: 'POST API de categoria',
+        categoriaAgregada
+    });
 }
+
 const putCategoria = async (req = request, res = response) => {
 
     const { id } = req.params;
-    const { _id, ...resto } = req.body;
 
-    const categoriaEditada = await Categoria.findByIdAndUpdate(id, resto, { new: true });
+    const { _id, estado, ...resto } = req.body;
 
-    res.status(201).json({
-        msg: 'PUT API CATEGORIA',
+    const categoriaEditada = await Categoria.findByIdAndUpdate(id, resto);
+
+
+    res.json({
+        msg: 'PUT API de categoria',
         categoriaEditada
-
-    })
-    
+    });
 
 }
+
 const deleteCategoria = async (req = request, res = response) => {
 
     const { id } = req.params;
 
-    const categoriaEliminada = await Categoria.findByIdAndDelete(id);
-    res.json({
-        msg: 'DELETE API DE CATEGORIAS',
-        categoriaEliminada
-    })
+    const query = { categoria: id };
+    const productos = await Producto.find(query);
+    const productoId = productos.map((product) => product._id);
+    const idA = req.usuario.id;
 
+    const colleccion = "Categoria";
+    const categoriaDB = await Categoria.findOne({ nombre: colleccion });
+
+    if (!categoriaDB) {
+        const deleteCategoria = new Categoria({
+            nombre: "Categoria",
+            descripcion:"Categoria",
+            proveedor: "Categoria",
+            usuario: idA,
+        });
+
+        await deleteCategoria.save();
+    }
+
+    const querys = { nombre: "Categoria" };
+    const { _id } = await Categoria.findOne(querys);
+
+    const editado = await Producto.updateMany({ categoria: id }, { categoria: _id });
+
+    const categoriaBorrada = await Categoria.findByIdAndDelete(id);
+
+    res.json({
+        msg: 'DELETE Categoria',
+        categoriaBorrada
+    });
 }
 
+
 module.exports = {
-    getCategoria,
+    getCategorias,
+    getCategoriaPorId,
     postCategoria,
     putCategoria,
-    deleteCategoria,
-    getCategoriaById
+    deleteCategoria
 }

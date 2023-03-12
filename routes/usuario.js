@@ -1,34 +1,81 @@
-const {Router} = require('express');
-const {getUsuario, postUsuario, putUsuario, deleteUsuario, registroUsuario, deleteMyAccount, updateMyAccount} = require('../controllers/usuario');
+//importaciones
+const { Router } = require('express');
+const { check } = require('express-validator');
+
+const { getUsuarios, postUsuario, putUsuario, deleteUsuario, postRegistroUser, 
+    putUsuarioPerfil, deleteUsuarioPerfil } = require('../controllers/usuario');
+const { emailExiste, esRoleValido, existeUsuarioPorId } = require('../helpers/db-validators');
+const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router = Router();
 
-router.get('/mostrar', getUsuario);
-router.post('/agregar',[
+router.get('/mostrar', getUsuarios);
+
+router.post('/registro', [
+    check('nombre', 'El nombre es obligatorio para el post').not().isEmpty(),
+    check('password', 'La password es obligatorio para el post').not().isEmpty(),
+    check('password', 'La passwarod debe ser mayor a 6 letras').isLength({ min: 6 }),
+    check('correo', 'El correo no es valido').isEmail(),
+    check('correo').custom( emailExiste ),
+    validarCampos
+] ,postRegistroUser);
+
+
+router.post('/agregar', [
     validarJWT,
-    esAdminRole
-], postUsuario);
+    esAdminRole,
+    check('nombre', 'El nombre es obligatorio para el post').not().isEmpty(),
+    check('password', 'La password es obligatorio para el post').not().isEmpty(),
+    check('password', 'La passwarod debe ser mayor a 6 letras').isLength({ min: 6 }),
+    check('correo', 'El correo no es valido').isEmail(),
+    check('correo').custom( emailExiste ),
+    check('rol', 'El rol es obligatorio para el post').not().isEmpty(),
+    check('rol').custom(  esRoleValido ),
+    validarCampos
+] , postUsuario);
+
 
 router.put('/editar/:id',[
     validarJWT,
-    esAdminRole
+    esAdminRole,
+    check('id', 'No es un ID valido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    check('correo', 'El correo no es valido').isEmail(),
+    check('correo').custom( emailExiste ),
+    check('password', 'La password es obligatorio para el post').not().isEmpty(),
+    check('password', 'La passwarod debe ser mayor a 6 letras').isLength({ min: 6 }),
+    check('rol').custom( esRoleValido ),
+    validarCampos
 ], putUsuario);
 
-router.put('/editarmicuenta/:id',[
+router.put('/editarPerfil/:id', [
     validarJWT,
-], updateMyAccount);
+    check('id', 'No es un ID valido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    check('correo', 'El correo no es valido').isEmail(),
+    check('correo').custom( emailExiste ),
+    check('password', 'La password es obligatorio para el post').not().isEmpty(),
+    check('password', 'La passwarod debe ser mayor a 6 letras').isLength({ min: 6 }),
+    check('rol').custom( esRoleValido ),
+    validarCampos
+] ,putUsuarioPerfil);
 
-router.delete('/eliminar/:id',[
+router.delete('/eliminar/:id', [
     validarJWT,
-    esAdminRole
-], deleteUsuario);
+    esAdminRole,
+    check('id', 'No es un ID valido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    validarCampos
+] ,deleteUsuario);
 
-router.delete('/eliminarmicuenta/:id',[
+router.delete('/eliminarPerfil/:id', [
     validarJWT,
-], deleteMyAccount);
+    check('id', 'No es un ID valido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    validarCampos
+], deleteUsuarioPerfil);
 
-router.post('/register', registroUsuario);
 
 module.exports = router;

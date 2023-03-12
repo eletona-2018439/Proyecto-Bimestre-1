@@ -10,27 +10,27 @@ const getFactura = async (req = request, res = response) => {
     ])
 
     res.json({
-        msg: 'Facturas encontradas',
+        msg: 'Historial de facturas',
         factura
     })
 }
 
-const comprar = async (req = request, res = response) => {
-    const usuario = req.user._id;
+const generarFactura = async (req = request, res = response) => {
+    const usuario = req.usuario._id;
     const carrito = await Carrito.findOne({usuario: usuario});
-    const total = carrito.subtotal;
-    const detalle = carrito.producto;
-    const facturaDB = new Factura({usuario, total, detalle});
+    const total = carrito.total;
+    const detalles = carrito.producto;
+    const facturaDB = new Factura({usuario, total, detalles});
 
     await facturaDB.save();
 
     res.status(201).json({
-        msg: 'Factura',
+        msg: 'Factura generada',
         facturaDB
     })
 }
 
 module.exports = {
     getFactura,
-    comprar
+    generarFactura
 }
