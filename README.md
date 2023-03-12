@@ -9,3 +9,5 @@ Para instalar los modulos de node ejecutar el comando
 ```
 npm install
 ```
+Video explicando la funcinalidad del proyecto:
+[![Alt text](https://img.youtube.com/vi/N8OpeN7GwZE/0.jpg)](https://www.youtube.com/watch?v=N8OpeN7GwZE)
