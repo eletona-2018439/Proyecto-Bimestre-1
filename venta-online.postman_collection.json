@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Edy Letona\",\r\n    \"correo\": \"edy@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Joel Santiago\",\r\n    \"correo\": \"joel@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -30,7 +30,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"correo\": \"edy13@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n    \"correo\": \"carlos@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -78,13 +78,13 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODFhNTE2OGRiZWUzNTllMzkyYTQiLCJpYXQiOjE2Nzg1NzkzMzksImV4cCI6MTY3ODU4NjUzOX0.DNSMgFgY4v3xMQZ94aTnQh_ol2fbVbrs9ssM1lCDKQ0",
 						"type": "default"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Juegos de mesa\",\r\n    \"proveedor\": \"TLL\",\r\n    \"descripcion\": \"Encontraras variedad de juegos para pasarla un rato con tu familia\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Aparatos electronicos\",\r\n    \"proveedor\": \"Max\",\r\n    \"descripcion\": \"Visitanos y ecnontraras la variedad de productos disponibles en nuestra tienda\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -102,20 +102,20 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODFhNTE2OGRiZWUzNTllMzkyYTQiLCJpYXQiOjE2Nzg1NzkzMzksImV4cCI6MTY3ODU4NjUzOX0.DNSMgFgY4v3xMQZ94aTnQh_ol2fbVbrs9ssM1lCDKQ0",
 						"type": "default"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Leches\",\r\n    \"proveedor\": \"Ilgua\",\r\n    \"descripcion\": \"Leche sin lactosa\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Embutido\",\r\n    \"proveedor\": \"Toledo\",\r\n    \"descripcion\": \"Encuentra tus embutidos favoritos\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:8080/api/categorias/editar/"
+				"url": "localhost:8080/api/categorias/editar/640d1add100add98db17bdab"
 			},
 			"response": []
 		},
@@ -126,7 +126,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODFhNTE2OGRiZWUzNTllMzkyYTQiLCJpYXQiOjE2Nzg1NzkzMzksImV4cCI6MTY3ODU4NjUzOX0.DNSMgFgY4v3xMQZ94aTnQh_ol2fbVbrs9ssM1lCDKQ0",
 						"type": "default"
 					}
 				],
@@ -139,7 +139,7 @@
 						}
 					}
 				},
-				"url": "localhost:8080/api/categorias/eliminar/"
+				"url": "localhost:8080/api/categorias/eliminar/640d1b13100add98db17bdb7"
 			},
 			"response": []
 		},
@@ -159,13 +159,13 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODE1ZTE2OGRiZWUzNTllMzkyOWIiLCJpYXQiOjE2Nzg1ODE1MzcsImV4cCI6MTY3ODU4ODczN30.cLJ5xkVgMU4tmDVmzckWa7UFJnSCDfs67eaCm8CKsIw",
 						"type": "default"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Edy Argueta\",\r\n    \"correo\": \"edy@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"ADMIN_ROLE\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Allison Quiñonez\",\r\n    \"correo\": \"allison@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"ADMIN_ROLE\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -183,7 +183,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODE1ZTE2OGRiZWUzNTllMzkyOWIiLCJpYXQiOjE2Nzg1ODE1MzcsImV4cCI6MTY3ODU4ODczN30.cLJ5xkVgMU4tmDVmzckWa7UFJnSCDfs67eaCm8CKsIw",
 						"type": "default"
 					}
 				],
@@ -196,7 +196,7 @@
 						}
 					}
 				},
-				"url": "localhost:8080/api/usuarios/editar/"
+				"url": "localhost:8080/api/usuarios/editar/640b817b168dbee359e3929e"
 			},
 			"response": []
 		},
@@ -207,7 +207,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODE1ZTE2OGRiZWUzNTllMzkyOWIiLCJpYXQiOjE2Nzg1ODE1MzcsImV4cCI6MTY3ODU4ODczN30.cLJ5xkVgMU4tmDVmzckWa7UFJnSCDfs67eaCm8CKsIw",
 						"type": "default"
 					}
 				],
@@ -215,7 +215,7 @@
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": "localhost:8080/api/usuarios/eliminar/"
+				"url": "localhost:8080/api/usuarios/eliminar/640b81a5168dbee359e392a4"
 			},
 			"response": []
 		},
@@ -232,7 +232,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Edy Leonel\",\r\n    \"correo\": \"edy13@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"ADMIN_ROLE\"\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Arles Hernandez\",\r\n    \"correo\": \"arles@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"rol\": \"USER_ROLE\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -259,28 +259,19 @@
 			"response": []
 		},
 		{
-			"name": "Mostrar Producto",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "localhost:8080/api/productos/mostrar"
-			},
-			"response": []
-		},
-		{
 			"name": "Agregar Producto ",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODFhNTE2OGRiZWUzNTllMzkyYTQiLCJpYXQiOjE2Nzg1NzkzMzksImV4cCI6MTY3ODU4NjUzOX0.DNSMgFgY4v3xMQZ94aTnQh_ol2fbVbrs9ssM1lCDKQ0",
 						"type": "default"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Queso\",\r\n    \"categoria\": \"640b95f6c99d7226a160a0b2\",\r\n    \"precio\": 5,\r\n    \"descripcion\": \"Queso amarrillo en forma cuadrada\",\r\n    \"stock\": 3\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Jamón\",\r\n    \"categoria\": \"\",\r\n    \"precio\": 5,\r\n    \"descripcion\": \"5 rodajas por Q5.00\",\r\n    \"stock\": 25\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -298,20 +289,20 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODFhNTE2OGRiZWUzNTllMzkyYTQiLCJpYXQiOjE2Nzg1NjkyMTMsImV4cCI6MTY3ODU3NjQxM30.Zsf8-angv7Zm7f6aD-_qkv1HpYKs5zH8HTMqC0GLEYg",
 						"type": "default"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Fruta fresca\",\r\n    \"categoria\": \"640bd826a17bcb21445abdb0\",\r\n    \"precio\": 5,\r\n    \"descripcion\": \"Bebida refrescante con diferentes sabores\",\r\n    \"stock\": 5\r\n}",
+					"raw": "{\r\n    \"nombre\": \"Leche\",\r\n    \"categoria\": \"640bd826a17bcb21445abdb0\",\r\n    \"precio\": 20,\r\n    \"descripcion\": \"Sin lactosa\",\r\n    \"stock\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "localhost:8080/api/productos/editar/"
+				"url": "localhost:8080/api/productos/editar/640cef25309fb2ef41fcca67"
 			},
 			"response": []
 		},
@@ -322,11 +313,20 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODFhNTE2OGRiZWUzNTllMzkyYTQiLCJpYXQiOjE2Nzg1NjkyMTMsImV4cCI6MTY3ODU3NjQxM30.Zsf8-angv7Zm7f6aD-_qkv1HpYKs5zH8HTMqC0GLEYg",
 						"type": "default"
 					}
 				],
-				"url": "localhost:8080/api/productos/eliminar/"
+				"url": "localhost:8080/api/productos/eliminar/640cef25309fb2ef41fcca67"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar Producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/productos/mostrar"
 			},
 			"response": []
 		},
@@ -337,7 +337,13 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODFhNTE2OGRiZWUzNTllMzkyYTQiLCJpYXQiOjE2Nzg1NjkyMTMsImV4cCI6MTY3ODU3NjQxM30.Zsf8-angv7Zm7f6aD-_qkv1HpYKs5zH8HTMqC0GLEYg",
+						"type": "default"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -362,7 +368,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODE1ZTE2OGRiZWUzNTllMzkyOWIiLCJpYXQiOjE2Nzg1OTg4MDIsImV4cCI6MTY3ODYwNjAwMn0.RRjIbUkuQbUeGROgYkmA2H6WeshZ8KJj-IivI7Jd12A",
 						"type": "default"
 					}
 				],
@@ -386,7 +392,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODE1ZTE2OGRiZWUzNTllMzkyOWIiLCJpYXQiOjE2Nzg1OTg4MDIsImV4cCI6MTY3ODYwNjAwMn0.RRjIbUkuQbUeGROgYkmA2H6WeshZ8KJj-IivI7Jd12A",
 						"type": "default"
 					}
 				],
@@ -400,7 +406,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/carritos/agregarProducto/640bbc2caf45622bd0017706",
+					"raw": "localhost:8080/api/carritos/agregarProducto/640cc9da57b59b65fee68533",
 					"host": [
 						"localhost"
 					],
@@ -409,7 +415,7 @@
 						"api",
 						"carritos",
 						"agregarProducto",
-						"640bbc2caf45622bd0017706"
+						"640cc9da57b59b65fee68533"
 					],
 					"query": [
 						{
@@ -432,7 +438,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODE1ZTE2OGRiZWUzNTllMzkyOWIiLCJpYXQiOjE2Nzg1OTg4MDIsImV4cCI6MTY3ODYwNjAwMn0.RRjIbUkuQbUeGROgYkmA2H6WeshZ8KJj-IivI7Jd12A",
 						"type": "default"
 					}
 				],
@@ -451,7 +457,7 @@
 				"header": [
 					{
 						"key": "x-token",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDBiODE1ZTE2OGRiZWUzNTllMzkyOWIiLCJpYXQiOjE2Nzg1OTg4MDIsImV4cCI6MTY3ODYwNjAwMn0.RRjIbUkuQbUeGROgYkmA2H6WeshZ8KJj-IivI7Jd12A",
 						"type": "default"
 					}
 				],
